@@ -1,3 +1,7 @@
+//  Copyright © 2018 Steven Roach. All rights reserved.
+//
+//  Copyright © 2021 Angga Satya Putra. All rights reserved.
+
 #ifndef PCLWrapper_hpp
 #define PCLWrapper_hpp
 

@@ -1,3 +1,7 @@
+//  Copyright © 2018 Steven Roach. All rights reserved.
+//
+//  Copyright © 2021 Angga Satya Putra. All rights reserved.
+
 #include "PCLWrapper.hpp"
 
 #include <iostream>
@@ -117,7 +121,7 @@ PCLMesh performSurfaceReconstruction(PCLPointCloud inputPCLPointCloud) {
     pcl::StatisticalOutlierRemoval<pcl::PointNormal> statFilter;
     statFilter.setInputCloud(pointNormalCloud);
     statFilter.setMeanK(50);
-    statFilter.setStddevMulThresh(3);
+    statFilter.setStddevMulThresh(1.0);
 
     pcl::PointCloud<pcl::PointNormal>::Ptr filteredPointCloudPtr(new pcl::PointCloud<pcl::PointNormal>);
     statFilter.filter(*filteredPointCloudPtr);
@@ -125,7 +129,7 @@ PCLMesh performSurfaceReconstruction(PCLPointCloud inputPCLPointCloud) {
 
     std::cout << "Begin poisson reconstruction" << std::endl;
     pcl::Poisson<pcl::PointNormal> poisson;
-    poisson.setDepth(5);
+    poisson.setDepth(8);
     poisson.setInputCloud(filteredPointCloudPtr);
     poisson.setPointWeight(4);
     poisson.setSamplesPerNode(1.5);

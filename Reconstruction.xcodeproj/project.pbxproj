@@ -45,6 +45,8 @@
 		BABE4F76265E349C004A097A /* PointCloud.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABE4F75265E349C004A097A /* PointCloud.swift */; };
 		BABE4F78265E34D9004A097A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABE4F77265E34D9004A097A /* Constants.swift */; };
 		BABE4F7D265E35BA004A097A /* PCLWrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BABE4F7B265E35BA004A097A /* PCLWrapper.cpp */; };
+		BABE4F82265E4756004A097A /* CameraButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABE4F81265E4756004A097A /* CameraButton.swift */; };
+		BAD1B11F2664B83800321127 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD1B11E2664B83800321127 /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -90,6 +92,8 @@
 		BABE4F77265E34D9004A097A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		BABE4F7B265E35BA004A097A /* PCLWrapper.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PCLWrapper.cpp; sourceTree = "<group>"; };
 		BABE4F7C265E35BA004A097A /* PCLWrapper.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = PCLWrapper.hpp; sourceTree = "<group>"; };
+		BABE4F81265E4756004A097A /* CameraButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraButton.swift; sourceTree = "<group>"; };
+		BAD1B11E2664B83800321127 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -211,6 +215,7 @@
 			isa = PBXGroup;
 			children = (
 				BABE4F7A265E3596004A097A /* PCL */,
+				BAD1B11D2664B82100321127 /* Swift */,
 				BABE4F79265E358B004A097A /* UIKit */,
 			);
 			path = SupportFiles;
@@ -219,6 +224,7 @@
 		BABE4F73265E33C4004A097A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				BABE4F81265E4756004A097A /* CameraButton.swift */,
 				BABE4F2C265E22CA004A097A /* LaunchScreen.storyboard */,
 				BABE4F27265E22C9004A097A /* Main.storyboard */,
 			);
@@ -250,6 +256,14 @@
 				BABE4F7C265E35BA004A097A /* PCLWrapper.hpp */,
 			);
 			path = PCL;
+			sourceTree = "<group>";
+		};
+		BAD1B11D2664B82100321127 /* Swift */ = {
+			isa = PBXGroup;
+			children = (
+				BAD1B11E2664B83800321127 /* Extensions.swift */,
+			);
+			path = Swift;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -324,6 +338,8 @@
 			files = (
 				BABE4F78265E34D9004A097A /* Constants.swift in Sources */,
 				BABE4F76265E349C004A097A /* PointCloud.swift in Sources */,
+				BABE4F82265E4756004A097A /* CameraButton.swift in Sources */,
+				BAD1B11F2664B83800321127 /* Extensions.swift in Sources */,
 				BABE4F26265E22C9004A097A /* SceneViewController.swift in Sources */,
 				BABE4F22265E22C9004A097A /* AppDelegate.swift in Sources */,
 				BABE4F24265E22C9004A097A /* SceneDelegate.swift in Sources */,
@@ -374,7 +390,7 @@
 				CLANG_WARN_CXX0X_EXTENSIONS = YES;
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_FLOAT_CONVERSION = YES;
@@ -393,16 +409,19 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -449,7 +468,7 @@
 				CLANG_WARN_CXX0X_EXTENSIONS = YES;
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_FLOAT_CONVERSION = YES;
@@ -468,11 +487,14 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = fast;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
