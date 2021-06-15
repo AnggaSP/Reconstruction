@@ -23,9 +23,9 @@ pcl::PointCloud<pcl::Normal>::Ptr computeNormals(pcl::PointCloud<pcl::PointXYZ>:
     normalEstimation.setSearchMethod(tree);
     normalEstimation.setNumberOfThreads(8);
     normalEstimation.setInputCloud(pointCloudPtr);
-    normalEstimation.setKSearch(10);
+    normalEstimation.setRadiusSearch(0.05);
     normalEstimation.setViewPoint(viewpoint.x, viewpoint.y, viewpoint.z);
-
+ 
     // Compute normals
     pcl::PointCloud<pcl::Normal>::Ptr cloudNormalsPtr(new pcl::PointCloud<pcl::Normal>());
     normalEstimation.compute(*cloudNormalsPtr);
@@ -120,8 +120,8 @@ PCLMesh performSurfaceReconstruction(PCLPointCloud inputPCLPointCloud) {
     std::cout << "Statistically Filtering points" << std::endl;
     pcl::StatisticalOutlierRemoval<pcl::PointNormal> statFilter;
     statFilter.setInputCloud(pointNormalCloud);
-    statFilter.setMeanK(50);
-    statFilter.setStddevMulThresh(1.0);
+    statFilter.setMeanK(25);
+    statFilter.setStddevMulThresh(0.2);
 
     pcl::PointCloud<pcl::PointNormal>::Ptr filteredPointCloudPtr(new pcl::PointCloud<pcl::PointNormal>);
     statFilter.filter(*filteredPointCloudPtr);

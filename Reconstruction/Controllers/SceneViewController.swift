@@ -25,7 +25,7 @@ class SceneViewController: UIViewController, ARSCNViewDelegate, SCNSceneRenderer
             surfaceParentNode.isHidden = !isSurfaceDisplayOn
         }
     }
-    internal var isCapturingPoints = false {
+    private var isCapturingPoints = false {
         didSet {
             updateScanningViewState()
             if isCapturingPoints {
@@ -39,8 +39,8 @@ class SceneViewController: UIViewController, ARSCNViewDelegate, SCNSceneRenderer
     }
 
     // UI
-    internal let reconstructButton = UIButton()
-    internal let capturePointsButton = CameraButton()
+    private let capturePointsButton = CameraButton()
+    private let largeConfig = UIImage.SymbolConfiguration(pointSize: 24, weight: .regular, scale: .large)
 
     // MARK: - UIViewController
 
@@ -67,7 +67,8 @@ class SceneViewController: UIViewController, ARSCNViewDelegate, SCNSceneRenderer
         super.viewWillAppear(animated)
 
         // Set Session configuration
-        sessionConfiguration.planeDetection = ARWorldTrackingConfiguration.PlaneDetection.horizontal
+        sessionConfiguration.automaticImageScaleEstimationEnabled = true
+        sessionConfiguration.planeDetection = .horizontal
 
         // Run the view's session
         sceneView.session.run(sessionConfiguration)
@@ -106,39 +107,36 @@ class SceneViewController: UIViewController, ARSCNViewDelegate, SCNSceneRenderer
     }
 
     private func addReconstructButton() {
-        reconstructButton.isEnabled = false
+        let reconstructButton = UIButton()
         view.addSubview(reconstructButton)
+        reconstructButton.frame.size = CGSize(width: 36, height: 36)
         reconstructButton.translatesAutoresizingMaskIntoConstraints = false
-        reconstructButton.setTitle("View", for: .normal)
-        reconstructButton.setTitleColor(UIColor.red, for: .normal)
-        reconstructButton.setTitleColor(UIColor.gray, for: .disabled)
-        reconstructButton.backgroundColor = UIColor.white.withAlphaComponent(0.6)
-        reconstructButton.showsTouchWhenHighlighted = true
-        reconstructButton.layer.cornerRadius = 4
+        reconstructButton.setImage(UIImage(systemName: "camera.rotate", withConfiguration: largeConfig)?.withTintColor(.red, renderingMode: .alwaysOriginal), for: .normal)
+        reconstructButton.backgroundColor = UIColor.clear
+        reconstructButton.showsTouchWhenHighlighted = false
         reconstructButton.contentEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
         reconstructButton.addTarget(self, action: #selector(reconstructButtonTapped(sender:)), for: .touchUpInside)
 
         // Contraints
         let guide = view.safeAreaLayoutGuide
-        reconstructButton.bottomAnchor.constraint(equalTo: guide.bottomAnchor, constant: -16.0).isActive = true
+        reconstructButton.bottomAnchor.constraint(equalTo: guide.bottomAnchor, constant: -12.0).isActive = true
         reconstructButton.centerXAnchor.constraint(equalTo: guide.centerXAnchor, constant: 80.0).isActive = true
     }
 
     private func addResetButton() {
         let resetButton = UIButton()
         view.addSubview(resetButton)
+        resetButton.frame.size = CGSize(width: 36, height: 36)
         resetButton.translatesAutoresizingMaskIntoConstraints = false
-        resetButton.setTitle("Reset", for: .normal)
-        resetButton.setTitleColor(UIColor.red, for: .normal)
-        resetButton.backgroundColor = UIColor.white.withAlphaComponent(0.6)
-        resetButton.showsTouchWhenHighlighted = true
-        resetButton.layer.cornerRadius = 4
+        resetButton.setImage(UIImage(systemName: "gobackward", withConfiguration: largeConfig)?.withTintColor(.red, renderingMode: .alwaysOriginal), for: .normal)
+        resetButton.backgroundColor = UIColor.clear
+        resetButton.showsTouchWhenHighlighted = false
         resetButton.contentEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
         resetButton.addTarget(self, action: #selector(resetButtonTapped(sender:)), for: .touchUpInside)
 
         // Contraints
         let guide = view.safeAreaLayoutGuide
-        resetButton.bottomAnchor.constraint(equalTo: guide.bottomAnchor, constant: -16.0).isActive = true
+        resetButton.bottomAnchor.constraint(equalTo: guide.bottomAnchor, constant: -8.0).isActive = true
         resetButton.centerXAnchor.constraint(equalTo: guide.centerXAnchor, constant: -80.0).isActive = true
     }
 
@@ -166,9 +164,7 @@ class SceneViewController: UIViewController, ARSCNViewDelegate, SCNSceneRenderer
     }
 
     @IBAction func reconstructButtonTapped(sender: UIButton) {
-
         // Prepare Point Cloud data structures in C struct format
-
         let pclPointSize = pointCloud.framePointSizes
         let pclPoints = pointCloud.points.map { PCLPoint3D(x: Double($0.x), y: Double($0.y), z: Double($0.z)) }
         let pclViewpoints = pointCloud.frameViewpoint.map { PCLPoint3D(x: Double($0.x), y: Double($0.y), z: Double($0.z)) }
@@ -222,7 +218,6 @@ class SceneViewController: UIViewController, ARSCNViewDelegate, SCNSceneRenderer
     }
 
     @IBAction func resetButtonTapped(sender: UIButton) {
-
         pointCloud.points = []
         pointCloud.framePointSizes = []
         pointCloud.frameViewpoint = []
@@ -249,13 +244,11 @@ class SceneViewController: UIViewController, ARSCNViewDelegate, SCNSceneRenderer
     /**
      Updates the state of the view based on scanning properties.
      */
-    internal func updateScanningViewState() {
+    private func updateScanningViewState() {
         capturePointsButton.isSelected = isCapturingPoints
-        reconstructButton.isEnabled = !isCapturingPoints && pointCloud.points.count > 0
     }
 
     private func capturePoints() {
-
         // Store Points
         guard let rawFeaturePoints = sceneView.session.currentFrame?.rawFeaturePoints else {
             return
@@ -289,7 +282,6 @@ class SceneViewController: UIViewController, ARSCNViewDelegate, SCNSceneRenderer
      Constructs an SCNNode representing the given PCL surface mesh output.
      */
     private func constructSurfaceNode(pclMesh: PCLMesh) -> SCNNode {
-
         // Construct vertices array
         var vertices = [SCNVector3]()
         for i in 0..<pclMesh.numPoints {

@@ -58,7 +58,7 @@
 		BABE4F2A265E22CA004A097A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BABE4F2D265E22CA004A097A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BABE4F2F265E22CA004A097A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BABE4F36265E232A004A097A /* Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
+		BABE4F36265E232A004A097A /* PCL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PCL.h; sourceTree = "<group>"; };
 		BABE4F37265E2331004A097A /* libpcl_ml.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpcl_ml.a; path = PCL/libpcl_ml.a; sourceTree = "<group>"; };
 		BABE4F38265E2331004A097A /* libboost_date_time.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_date_time.a; path = PCL/libboost_date_time.a; sourceTree = "<group>"; };
 		BABE4F39265E2331004A097A /* libpcl_kdtree.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpcl_kdtree.a; path = PCL/libpcl_kdtree.a; sourceTree = "<group>"; };
@@ -198,7 +198,6 @@
 				BABE4F42265E2331004A097A /* libqhullcpp.a */,
 				BABE4F4A265E2331004A097A /* libqhullstatic_r.a */,
 				BABE4F3C265E2331004A097A /* libqhullstatic.a */,
-				BABE4F36265E232A004A097A /* Bridging-Header.h */,
 			);
 			path = Libraries;
 			sourceTree = "<group>";
@@ -214,6 +213,7 @@
 		BABE4F72265E336C004A097A /* SupportFiles */ = {
 			isa = PBXGroup;
 			children = (
+				BADE34812668E6A9000E7A00 /* Header */,
 				BABE4F7A265E3596004A097A /* PCL */,
 				BAD1B11D2664B82100321127 /* Swift */,
 				BABE4F79265E358B004A097A /* UIKit */,
@@ -264,6 +264,14 @@
 				BAD1B11E2664B83800321127 /* Extensions.swift */,
 			);
 			path = Swift;
+			sourceTree = "<group>";
+		};
+		BADE34812668E6A9000E7A00 /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				BABE4F36265E232A004A097A /* PCL.h */,
+			);
+			path = Header;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -436,7 +444,7 @@
 					"\"$(PROJECT_DIR)/Libraries/flann-ios-device/include\"",
 					"\"$(PROJECT_DIR)/Libraries/PCL/include/pcl-1.8\"",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LLVM_LTO = YES_THIN;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -509,7 +517,7 @@
 					"\"$(PROJECT_DIR)/Libraries/flann-ios-device/include\"",
 					"\"$(PROJECT_DIR)/Libraries/PCL/include/pcl-1.8\"",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LLVM_LTO = YES_THIN;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -539,7 +547,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = id.ac.esaunggul.reconstruction;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Libraries/Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = Reconstruction/SupportFiles/Header/PCL.h;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -564,7 +572,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = id.ac.esaunggul.reconstruction;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "Libraries/Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = Reconstruction/SupportFiles/Header/PCL.h;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
